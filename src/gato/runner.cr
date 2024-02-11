@@ -1,5 +1,5 @@
 module Gato
-  class Runner < MessageProcessor
+  class Runner
     def self.start(routing_key : String)
       Log.notice { "El gato esta maullando..." }
 
@@ -13,7 +13,7 @@ module Gato
           q.subscribe(no_ack: false, block: true) do |msg|
             message = JSON.parse(msg.body_io.to_s)
             Log.notice { "Received a new Message" }
-            get_message message
+            MessageGetter.get_message message
             Log.notice { "Done" }
           end
         end
