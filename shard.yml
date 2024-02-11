@@ -1,0 +1,9 @@
+name: gato
+version: 0.1.0
+
+authors:
+  - descholar-ceo <emmanuellamugi@gmail.com>
+
+crystal: '>= 1.11.2'
+
+license: MIT
