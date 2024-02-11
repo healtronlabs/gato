@@ -1,5 +1,5 @@
 module Gato
     class MessageProcessor
-        property message
+        property message : String?
     end
 end
