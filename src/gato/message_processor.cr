@@ -1,5 +1,5 @@
 module Gato
     class MessageProcessor
-        property message : String?
+        property message : Hash(String, JSON::Any)?
     end
 end
