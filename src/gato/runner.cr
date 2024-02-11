@@ -1,5 +1,5 @@
 module Gato
-  class Runner < Gato::MessageProcessor
+  class Runner < MessageProcessor
     def self.start(routing_key : String)
       Log.notice { "El gato esta maullando..." }
 
