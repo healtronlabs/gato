@@ -20,7 +20,7 @@ module Gato
             message = JSON.parse(msg.body_io.to_s)
             Log.notice { "Received a new Message" }
             Gato.get_message do |msg|
-              msg.message = message
+              msg.message = message.try(&.as_s)
             end
             Log.notice { "Done" }
           end
