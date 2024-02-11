@@ -1,7 +1,5 @@
 module Gato
-    class MessageGetter
-        def self.get_message(message : String) : Nil
-            message
-        end
+    class MessageProcessor
+        property message
     end
 end

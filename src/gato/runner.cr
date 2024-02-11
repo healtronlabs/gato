@@ -1,4 +1,10 @@
 module Gato
+  class_getter message_processor = MessageProcessor.new
+
+  def self.get_message(&block) : Nil
+    yield message_processor
+  end
+
   class Runner
     def self.start(routing_key : String)
       Log.notice { "El gato esta maullando..." }
@@ -13,7 +19,9 @@ module Gato
           q.subscribe(no_ack: false, block: true) do |msg|
             message = JSON.parse(msg.body_io.to_s)
             Log.notice { "Received a new Message" }
-            MessageGetter.get_message message
+            Gato.get_message do |msg|
+              msg.message = message
+            end
             Log.notice { "Done" }
           end
         end
