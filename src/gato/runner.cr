@@ -6,22 +6,22 @@ module Gato
   end
 
   class Runner
-    def self.start(routing_key : String)
+    def self.start(queue_name : String, &block : JSON::Any ->) : Nil
       Log.notice { "El gato esta maullando..." }
 
       AMQP::Client.start(Gato.configuration.amqp_url.to_s) do |c|
         c.channel do |ch|
-          q = ch.queue(routing_key)
-          ch.prefetch(count: 1)
+          q = ch.queue queue_name
+          ch.prefetch count: 1
 
           puts "Waiting for tasks. To exit press CTRL+C"
 
           q.subscribe(no_ack: false, block: true) do |msg|
-            message = JSON.parse(msg.body_io.to_s)
+            message = JSON.parse msg.body_io.to_s
             Log.notice { "Received a new Message" }
-            Gato.get_message do |msg|
-              msg.message = message.try(&.as_h)
-            end
+            
+            block.call message
+            
             Log.notice { "Done" }
           end
         end
