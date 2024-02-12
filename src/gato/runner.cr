@@ -2,7 +2,6 @@ module Gato
   class Runner
     def self.start(param : Array(NamedTuple(queue_name: String, block: JSON::Any ->))) : Nil
       Log.notice { "El gato esta maullando..." }
-
       AMQP::Client.start(Gato.configuration.amqp_url.to_s) do |c|
         c.channel do |ch|
           q = ch.queue param[0][:queue_name]
@@ -17,6 +16,7 @@ module Gato
           end
         end
       end
+      Log.notice { "El gato no maúlla..." }
     end
   end
 end
