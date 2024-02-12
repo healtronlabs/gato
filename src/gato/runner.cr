@@ -12,7 +12,7 @@ module Gato
             message = JSON.parse msg.body_io.to_s
             Log.notice { "Received a new Message" }
             param[0][:block].call message
-            ch.basic_ack(msg.delivery_tag)
+            msg.ack
             Log.notice { "Done" }
           end
         end
