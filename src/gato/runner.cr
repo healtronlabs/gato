@@ -1,6 +1,6 @@
 module Gato
   class Runner
-    def self.start(arg0 : NamedTuple(queue_name: String, &block: JSON::Any ->)) : Nil
+    def self.start(arg0 : NamedTuple(queue_name: String, block: &.JSON::Any ->)) : Nil
       Log.notice { "El gato esta maullando..." }
 
       AMQP::Client.start(Gato.configuration.amqp_url.to_s) do |c|
