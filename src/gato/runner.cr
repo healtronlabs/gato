@@ -8,7 +8,7 @@ module Gato
             q = ch.queue curr_param[:queue_name], durable: true
             ch.prefetch count: 1
   
-            q.subscribe(no_ack: false, block: false) do |msg|
+            q.subscribe(no_ack: false, block: true) do |msg|
               message = JSON.parse msg.body_io.to_s
               Log.notice { "Received a new message for #{curr_param[:queue_name]} queue" }
               curr_param[:message_handler].call message
