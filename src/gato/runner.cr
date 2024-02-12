@@ -1,6 +1,4 @@
 module Gato
-  class_getter message_processor = MessageProcessor.new
-
   class Runner
     def self.start(queue_name : String, &block : JSON::Any ->) : Nil
       Log.notice { "El gato esta maullando..." }
