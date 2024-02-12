@@ -9,14 +9,13 @@ module Gato
 
           q.subscribe(no_ack: false, block: true) do |msg|
             message = JSON.parse msg.body_io.to_s
-            Log.notice { "Received a new Message" }
+            Log.notice { "Received a new message for #{param[0][:queue_name]} queue" }
             param[0][:block].call message
             msg.ack
-            Log.notice { "Done" }
+            Log.notice { "Done processing the new message!" }
           end
         end
       end
-      Log.notice { "El gato no maúlla..." }
     end
   end
 end
