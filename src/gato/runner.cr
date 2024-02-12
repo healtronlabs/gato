@@ -1,10 +1,6 @@
 module Gato
   class_getter message_processor = MessageProcessor.new
 
-  def self.get_message(&block) : Nil
-    yield message_processor
-  end
-
   class Runner
     def self.start(queue_name : String, &block : JSON::Any ->) : Nil
       Log.notice { "El gato esta maullando..." }
@@ -12,7 +8,7 @@ module Gato
       AMQP::Client.start(Gato.configuration.amqp_url.to_s) do |c|
         c.channel do |ch|
           q = ch.queue queue_name
-          ch.prefetch count: 1
+          ch.prefetch count: 100
 
           puts "Waiting for tasks. To exit press CTRL+C"
 
