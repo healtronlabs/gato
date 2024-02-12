@@ -1,6 +1,6 @@
 module Gato
   class Runner
-    def self.start(param : Array(NamedTuple(queue_name: String, block: JSON::Any ->))) : Nil
+    def self.start(param : Array(NamedTuple(queue_name: String, message_handler: JSON::Any ->))) : Nil
       Log.notice { "El gato esta maullando..." }
       AMQP::Client.start(Gato.configuration.amqp_url.to_s) do |c|
         c.channel do |ch|
@@ -10,7 +10,7 @@ module Gato
           q.subscribe(no_ack: false, block: true) do |msg|
             message = JSON.parse msg.body_io.to_s
             Log.notice { "Received a new message for #{param[0][:queue_name]} queue" }
-            param[0][:block].call message
+            param[0][:message_handler].call message
             msg.ack
             Log.notice { "Done processing the new message!" }
           end
