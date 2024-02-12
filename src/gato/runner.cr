@@ -5,7 +5,7 @@ module Gato
       AMQP::Client.start(Gato.configuration.amqp_url.to_s) do |c|
         c.channel do |ch|
           param.each do |curr_param|
-            q = ch.queue curr_param[:queue_name]
+            q = ch.queue curr_param[:queue_name], durable: true
             ch.prefetch count: 1
   
             q.subscribe(no_ack: false, block: true) do |msg|
@@ -16,6 +16,7 @@ module Gato
               Log.notice { "Done processing the new message!" }
             end
           end
+          sleep
         end
       end
     end
