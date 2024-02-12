@@ -11,9 +11,8 @@ module Gato
           q.subscribe(no_ack: false, block: true) do |msg|
             message = JSON.parse msg.body_io.to_s
             Log.notice { "Received a new Message" }
-            
             param[0][:block].call message
-            
+            ch.basic_ack(msg.delivery_tag)
             Log.notice { "Done" }
           end
         end
