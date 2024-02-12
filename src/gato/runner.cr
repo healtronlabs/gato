@@ -16,6 +16,7 @@ module Gato
               Log.notice { "Done processing the new message!" }
             end
           end
+          sleep
         end
       end
     end
