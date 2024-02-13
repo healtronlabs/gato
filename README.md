@@ -1,6 +1,6 @@
 # gato
 
-Gato is a lightweight wrapper tailored for effortless integration of LavinMQ, a robust messaging system, within the Lucky framework. Designed to streamline the utilization of AMQP (Advanced Message Queuing Protocol) in Lucky applications, Gato simplifies the process of publishing and subscribing to queues, all while focusing on the unique features and capabilities of LavinMQ.
+Gato is a lightweight wrapper tailored for effortless integration of LavinMQ, a robust messaging system using AMQP 0.9.1 protocols, within the Lucky framework. Designed to streamline the utilization of AMQP (Advanced Message Queuing Protocol) in Lucky applications, Gato simplifies the process of publishing and subscribing to queues, all while focusing on the unique features and capabilities of LavinMQ.
 
 ### Key Features:
 
