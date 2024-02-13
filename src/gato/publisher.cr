@@ -1,6 +1,6 @@
 module Gato
   class Publisher
-    def self.publish(data : JSON::Any, queue_name : String)
+    def self.publish(data : String, queue_name : String)
       AMQP::Client.start(Gato.configuration.amqp_url.to_s) do |c|
         c.channel do |ch|
           unless LuckyEnv.production?
