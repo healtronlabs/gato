@@ -6,4 +6,8 @@ authors:
 
 crystal: '>= 1.9.2'
 
+dependencies:
+  amqp-client:
+    github: cloudamqp/amqp-client.cr
+
 license: MIT

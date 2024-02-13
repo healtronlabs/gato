@@ -1,3 +1,4 @@
+require "amqp-client"
 require "./gato/**"
 
 # TODO: Write documentation for `Gato`
